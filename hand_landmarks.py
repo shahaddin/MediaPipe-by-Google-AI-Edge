@@ -1,7 +1,10 @@
 import mediapipe_init
+import mediapipe_init
 import cv2
 import mediapipe as mp
 
+camera = mediapipe_init.initialize_camera()
+mp_holistic, holistic_model, mp_drawing = mediapipe_init.initialize_holistic()
 camera = mediapipe_init.initialize_camera()
 mp_holistic, holistic_model, mp_drawing = mediapipe_init.initialize_holistic()
 
@@ -35,4 +38,6 @@ while camera.isOpened() == True:
     mediapipe_init.display_camera("Hand", frame, x, y)
 
     if(mediapipe_init.process_camera(camera) == 0):
+    if(mediapipe_init.process_camera(camera) == 0):
         break
+
