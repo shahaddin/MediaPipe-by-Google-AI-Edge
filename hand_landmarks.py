@@ -18,17 +18,21 @@ while camera.isOpened() == True:
     results = holistic_model.process(frame)
     frame.flags.writeable = True
 
-    mp_drawing.draw_landmarks(
-	frame,
-    results.right_hand_landmarks,
-	mp_holistic.HAND_CONNECTIONS)
+    if results.right_hand_landmarks is not None:
+        mp_drawing.draw_landmarks(
+            frame, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+        
+        landmark_part = results.right_hand_landmarks
+        mediapipe_init.landmark_position("Right Hand", landmark_part, x, y)
+    
+    if results.left_hand_landmarks is not None:
+        mp_drawing.draw_landmarks(
+            frame, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+        
+        landmark_part = results.left_hand_landmarks
+        mediapipe_init.landmark_position("Left Hand", landmark_part, x , y)
 
-    mp_drawing.draw_landmarks(
-	frame,
-    results.left_hand_landmarks,
-	mp_holistic.HAND_CONNECTIONS)
-
-    mediapipe_init.display_camera(frame, x, y)
+    mediapipe_init.display_camera("Hand", frame, x, y)
 
     if(mediapipe_init.process_camera(camera) == 0):
         break
