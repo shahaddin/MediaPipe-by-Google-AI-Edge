@@ -38,6 +38,5 @@ while camera.isOpened() == True:
     mediapipe_init.display_camera("Hand", frame, x, y)
 
     if(mediapipe_init.process_camera(camera) == 0):
-    if(mediapipe_init.process_camera(camera) == 0):
         break
 
